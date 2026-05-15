@@ -186,75 +186,6 @@
       transition: opacity 0.12s ease, transform 0.12s ease;
     }
 
-    /* ── Appellate section (full-width) ── */
-    .appellate-section {
-      margin-top: 40px;
-    }
-
-    .appellate-row {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .appellate-card {
-      flex: 1;
-      min-width: 220px;
-      background: #fdfbf5;
-      border: 1.5px solid #d8ceb8;
-      border-radius: 8px;
-      overflow: hidden;
-      transition: box-shadow 0.15s ease, border-color 0.15s ease;
-    }
-
-    .appellate-card:hover {
-      box-shadow: 0 4px 16px rgba(107, 31, 31, 0.10);
-      border-color: #b89060;
-    }
-
-    .appellate-card .court-card-header {
-      background: #2a0e0e;
-      border-bottom-color: #5a2a2a;
-    }
-
-    .appellate-card .court-card-title {
-      color: #f0e6cc;
-    }
-
-    .appellate-card .court-card-subtitle {
-      color: #9a7a5a;
-    }
-
-    .appellate-card .court-badge {
-      background: #c79b3b;
-    }
-
-    .appellate-card .court-badge svg {
-      fill: #2a0e0e;
-    }
-
-    /* ── Hierarchy note ── */
-    .hierarchy-note {
-      margin-bottom: 32px;
-      background: #fbeec3;
-      border: 1px solid #c79b3b;
-      border-radius: 6px;
-      padding: 12px 16px;
-      font-size: 13px;
-      color: #5a4000;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-
-    .hierarchy-note svg {
-      width: 16px;
-      height: 16px;
-      fill: #c79b3b;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
     /* ── Footer ── */
     footer {
       text-align: center;
@@ -275,17 +206,11 @@
 
   <main>
 
-    <div class="hierarchy-note">
-      <svg viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm1 11H9v-2h2v2zm0-4H9V6h2v3z"/></svg>
-      <span>Tennessee's court system is hierarchical. Trial-level courts are listed below; appellate courts appear at the bottom of this page.</span>
-    </div>
-
-    <!-- Trial Courts -->
-    <div class="section-label">Trial Courts — General Jurisdiction</div>
+    <div class="section-label">Trial Courts</div>
 
     <div class="courts-grid">
 
-      <!-- Circuit Court -->
+      <!-- Circuit Court (CC) -->
       <div class="court-card">
         <div class="court-card-header">
           <div class="court-badge">
@@ -300,42 +225,42 @@
           <li>
             <a href="CC-CIV.html">
               <span class="case-tag tag-civil">Civil</span>
-              <span class="case-name">Civil</span>
+              <span class="case-name">Civil — General Flow</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="CC-DIV.html">
+              <span class="case-tag tag-family">Family</span>
+              <span class="case-name">Divorce (Domestic Relations)</span>
+              <span class="arrow">›</span>
+            </a>
+          </li>
+          <li>
+            <a href="CC-CUS.html">
+              <span class="case-tag tag-family">Family</span>
+              <span class="case-name">Child Custody &amp; Visitation</span>
+              <span class="arrow">›</span>
+            </a>
+          </li>
+          <li>
+            <a href="CC-SUP.html">
+              <span class="case-tag tag-family">Family</span>
+              <span class="case-name">Child Support</span>
+              <span class="arrow">›</span>
+            </a>
+          </li>
+          <li>
+            <a href="CC-APP.html">
               <span class="case-tag tag-civil">Civil</span>
-              <span class="case-name">Personal Injury / Tort</span>
-              <span class="arrow">›</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="case-tag tag-civil">Civil</span>
-              <span class="case-name">Contract Dispute</span>
-              <span class="arrow">›</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="case-tag tag-criminal">Criminal</span>
-              <span class="case-name">Felony — General Flow</span>
-              <span class="arrow">›</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="case-tag tag-criminal">Criminal</span>
-              <span class="case-name">DUI / Traffic Criminal</span>
+              <span class="case-name">Appeals from General Sessions (De Novo)</span>
               <span class="arrow">›</span>
             </a>
           </li>
         </ul>
       </div>
 
-      <!-- Chancery Court -->
+      <!-- Chancery Court (CH) -->
       <div class="court-card">
         <div class="court-card-header">
           <div class="court-badge">
@@ -348,44 +273,58 @@
         </div>
         <ul class="case-list">
           <li>
-            <a href="#">
-              <span class="case-tag tag-civil">Civil</span>
+            <a href="CH-DOM.html">
+              <span class="case-tag tag-family">Family</span>
               <span class="case-name">Divorce &amp; Dissolution</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="CH-PRO.html">
               <span class="case-tag tag-civil">Civil</span>
               <span class="case-name">Property &amp; Title Dispute</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="CH-EQU.html">
               <span class="case-tag tag-civil">Civil</span>
-              <span class="case-name">Injunction / Restraining Order</span>
+              <span class="case-name">General Equity</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="CH-TRU.html">
               <span class="case-tag tag-civil">Civil</span>
               <span class="case-name">Trust &amp; Estate Litigation</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="CH-CGD.html">
               <span class="case-tag tag-civil">Civil</span>
-              <span class="case-name">Business / Shareholder Dispute</span>
+              <span class="case-name">Conservatorship &amp; Adult Guardianship</span>
+              <span class="arrow">›</span>
+            </a>
+          </li>
+          <li>
+            <a href="CH-FOR.html">
+              <span class="case-tag tag-civil">Civil</span>
+              <span class="case-name">Judicial Foreclosure</span>
+              <span class="arrow">›</span>
+            </a>
+          </li>
+          <li>
+            <a href="CH-MNH.html">
+              <span class="case-tag tag-general">General</span>
+              <span class="case-name">Mental Health Commitment</span>
               <span class="arrow">›</span>
             </a>
           </li>
         </ul>
       </div>
 
-      <!-- Criminal Court -->
+      <!-- Criminal Court (CR) -->
       <div class="court-card">
         <div class="court-card-header">
           <div class="court-badge">
@@ -398,44 +337,51 @@
         </div>
         <ul class="case-list">
           <li>
-            <a href="#">
+            <a href="CR-FEL.html">
               <span class="case-tag tag-criminal">Criminal</span>
               <span class="case-name">Felony — General Flow</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="CR-GRJ.html">
               <span class="case-tag tag-criminal">Criminal</span>
-              <span class="case-name">Arraignment &amp; Bail</span>
+              <span class="case-name">Grand Jury — Regular</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="CR-GRJ-INV.html">
               <span class="case-tag tag-criminal">Criminal</span>
-              <span class="case-name">Grand Jury Indictment</span>
+              <span class="case-name">Grand Jury — Investigative</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="CR-MIS.html">
               <span class="case-tag tag-criminal">Criminal</span>
-              <span class="case-name">Plea Negotiation</span>
+              <span class="case-name">Misdemeanor</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="CR-PRB.html">
               <span class="case-tag tag-criminal">Criminal</span>
-              <span class="case-name">Jury Trial</span>
+              <span class="case-name">Probation Violation</span>
+              <span class="arrow">›</span>
+            </a>
+          </li>
+          <li>
+            <a href="CR-APP.html">
+              <span class="case-tag tag-criminal">Criminal</span>
+              <span class="case-name">Appeals from General Sessions</span>
               <span class="arrow">›</span>
             </a>
           </li>
         </ul>
       </div>
 
-      <!-- Probate Court -->
+      <!-- Probate Court (PR) -->
       <div class="court-card">
         <div class="court-card-header">
           <div class="court-badge">
@@ -448,37 +394,44 @@
         </div>
         <ul class="case-list">
           <li>
-            <a href="#">
+            <a href="PR-TES.html">
               <span class="case-tag tag-probate">Probate</span>
-              <span class="case-name">Testate Estate (With Will)</span>
+              <span class="case-name">Estate Administration</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="PR-GRD.html">
               <span class="case-tag tag-probate">Probate</span>
-              <span class="case-name">Intestate Estate (No Will)</span>
+              <span class="case-name">Guardianship of Minors</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="PR-CON.html">
               <span class="case-tag tag-probate">Probate</span>
-              <span class="case-name">Guardianship / Conservatorship</span>
+              <span class="case-name">Conservatorship</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="PR-WIL.html">
               <span class="case-tag tag-probate">Probate</span>
               <span class="case-name">Will Contest</span>
+              <span class="arrow">›</span>
+            </a>
+          </li>
+          <li>
+            <a href="PR-TRU.html">
+              <span class="case-tag tag-probate">Probate</span>
+              <span class="case-name">Testamentary Trust Administration</span>
               <span class="arrow">›</span>
             </a>
           </li>
         </ul>
       </div>
 
-      <!-- General Sessions Court -->
+      <!-- General Sessions Court (GS) -->
       <div class="court-card">
         <div class="court-card-header">
           <div class="court-badge">
@@ -491,37 +444,51 @@
         </div>
         <ul class="case-list">
           <li>
-            <a href="#">
+            <a href="GS-CIV.html">
               <span class="case-tag tag-general">General</span>
-              <span class="case-name">Small Claims (≤ $25,000)</span>
+              <span class="case-name">Civil</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="GS-CRM.html">
               <span class="case-tag tag-criminal">Criminal</span>
-              <span class="case-name">Misdemeanor — General Flow</span>
+              <span class="case-name">Criminal — General Flow</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="GS-PRE.html">
               <span class="case-tag tag-criminal">Criminal</span>
               <span class="case-name">Preliminary Hearing (Felony Bind-Over)</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="GS-OOP.html">
               <span class="case-tag tag-general">General</span>
-              <span class="case-name">Civil Warrant / Detainer Warrant</span>
+              <span class="case-name">Order of Protection</span>
+              <span class="arrow">›</span>
+            </a>
+          </li>
+          <li>
+            <a href="GS-TRF.html">
+              <span class="case-tag tag-general">General</span>
+              <span class="case-name">Traffic</span>
+              <span class="arrow">›</span>
+            </a>
+          </li>
+          <li>
+            <a href="GS-ENV.html">
+              <span class="case-tag tag-general">General</span>
+              <span class="case-name">Environmental Court</span>
               <span class="arrow">›</span>
             </a>
           </li>
         </ul>
       </div>
 
-      <!-- Juvenile Court -->
+      <!-- Juvenile Court (JV) -->
       <div class="court-card">
         <div class="court-card-header">
           <div class="court-badge">
@@ -534,87 +501,58 @@
         </div>
         <ul class="case-list">
           <li>
-            <a href="#">
+            <a href="JV-DEL.html">
               <span class="case-tag tag-juvenile">Juvenile</span>
-              <span class="case-name">Delinquency — General Flow</span>
+              <span class="case-name">Delinquency &amp; Unruly Child</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="JV-DEP.html">
               <span class="case-tag tag-juvenile">Juvenile</span>
               <span class="case-name">Dependency &amp; Neglect (DCS)</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="JV-TER.html">
               <span class="case-tag tag-family">Family</span>
               <span class="case-name">Termination of Parental Rights</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
-              <span class="case-tag tag-juvenile">Juvenile</span>
-              <span class="case-name">Unruly Child / Status Offense</span>
-              <span class="arrow">›</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
+            <a href="JV-ADO.html">
               <span class="case-tag tag-juvenile">Juvenile</span>
               <span class="case-name">Adoption</span>
               <span class="arrow">›</span>
             </a>
           </li>
-        </ul>
-      </div>
-
-      <!-- Family Court -->
-      <div class="court-card">
-        <div class="court-card-header">
-          <div class="court-badge">
-            <svg viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/></svg>
-          </div>
-          <div>
-            <div class="court-card-title">Family Court</div>
-            <div class="court-card-subtitle">Divorce, custody &amp; domestic relations</div>
-          </div>
-        </div>
-        <ul class="case-list">
           <li>
-            <a href="#">
-              <span class="case-tag tag-family">Family</span>
-              <span class="case-name">Divorce — Contested</span>
+            <a href="JV-CUS.html">
+              <span class="case-tag tag-juvenile">Juvenile</span>
+              <span class="case-name">Custody &amp; Visitation</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
-              <span class="case-tag tag-family">Family</span>
-              <span class="case-name">Divorce — Uncontested</span>
+            <a href="JV-SUP.html">
+              <span class="case-tag tag-juvenile">Juvenile</span>
+              <span class="case-name">Child Support</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
-              <span class="case-tag tag-family">Family</span>
-              <span class="case-name">Child Custody &amp; Parenting Plan</span>
+            <a href="JV-MNH.html">
+              <span class="case-tag tag-juvenile">Juvenile</span>
+              <span class="case-name">Mental Health</span>
               <span class="arrow">›</span>
             </a>
           </li>
           <li>
-            <a href="#">
-              <span class="case-tag tag-family">Family</span>
-              <span class="case-name">Child Support Modification</span>
-              <span class="arrow">›</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="case-tag tag-family">Family</span>
-              <span class="case-name">Order of Protection (Domestic)</span>
+            <a href="JV-TRF.html">
+              <span class="case-tag tag-juvenile">Juvenile</span>
+              <span class="case-name">Traffic</span>
               <span class="arrow">›</span>
             </a>
           </li>
@@ -622,98 +560,6 @@
       </div>
 
     </div><!-- /courts-grid -->
-
-    <!-- Appellate Courts -->
-    <div class="appellate-section">
-      <div class="section-label" style="margin-top: 8px;">Appellate Courts</div>
-      <div class="appellate-row">
-
-        <div class="appellate-card">
-          <div class="court-card-header">
-            <div class="court-badge">
-              <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#2a0e0e;"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm1 11H9v-2h2v2zm0-4H9V6h2v3z"/></svg>
-            </div>
-            <div>
-              <div class="court-card-title">Court of Appeals</div>
-              <div class="court-card-subtitle">Civil appeals · Intermediate appellate</div>
-            </div>
-          </div>
-          <ul class="case-list">
-            <li>
-              <a href="#">
-                <span class="case-tag tag-civil">Civil</span>
-                <span class="case-name">Civil Appeal — General Flow</span>
-                <span class="arrow">›</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <span class="case-tag tag-family">Family</span>
-                <span class="case-name">Family Law Appeal</span>
-                <span class="arrow">›</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="appellate-card">
-          <div class="court-card-header">
-            <div class="court-badge">
-              <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#2a0e0e;"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm1 11H9v-2h2v2zm0-4H9V6h2v3z"/></svg>
-            </div>
-            <div>
-              <div class="court-card-title">Court of Criminal Appeals</div>
-              <div class="court-card-subtitle">Criminal appeals · Intermediate appellate</div>
-            </div>
-          </div>
-          <ul class="case-list">
-            <li>
-              <a href="#">
-                <span class="case-tag tag-criminal">Criminal</span>
-                <span class="case-name">Criminal Appeal — General Flow</span>
-                <span class="arrow">›</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <span class="case-tag tag-criminal">Criminal</span>
-                <span class="case-name">Post-Conviction Relief</span>
-                <span class="arrow">›</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="appellate-card">
-          <div class="court-card-header">
-            <div class="court-badge">
-              <svg viewBox="0 0 20 20" style="width:16px;height:16px;fill:#2a0e0e;"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm1 11H9v-2h2v2zm0-4H9V6h2v3z"/></svg>
-            </div>
-            <div>
-              <div class="court-card-title">Tennessee Supreme Court</div>
-              <div class="court-card-subtitle">Court of last resort · Discretionary review</div>
-            </div>
-          </div>
-          <ul class="case-list">
-            <li>
-              <a href="#">
-                <span class="case-tag tag-general">General</span>
-                <span class="case-name">Petition for Permission to Appeal</span>
-                <span class="arrow">›</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <span class="case-tag tag-criminal">Criminal</span>
-                <span class="case-name">Capital Case — Direct Appeal</span>
-                <span class="arrow">›</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-
-      </div>
-    </div><!-- /appellate-section -->
 
   </main>
 
