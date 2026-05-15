@@ -3,258 +3,616 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tennessee Courts - Case Flow Index</title>
+  <title>Tennessee Courts — Case Flow Reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+    :root {
+      --parchment: #f5f0e8;
+      --card-bg: #fdfbf5;
+      --ink: #1a1510;
+      --ink-mid: #3a3530;
+      --ink-light: #4a4640;
+      --ink-faint: #8a7e6a;
+      --rule: #d8cdb0;
+      --rule-light: #ede7d6;
+      --dark: #0f1923;
+      --dark-mid: #1c2b3a;
+      --gold: #c9963b;
+      --gold-light: #e8c97a;
+      --gold-dim: rgba(201,150,59,0.25);
+      --burgundy: #6b1f1f;
+    }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      background: #faf9f5;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      color: #1a1814;
+      background: var(--parchment);
+      color: var(--ink);
       min-height: 100vh;
-    }
-
-    /* ── Header ── */
-    header {
-      background: #6b1f1f;
-      color: #fdfbf5;
-      padding: 36px 48px 32px;
-      border-bottom: 4px solid #c79b3b;
-    }
-
-    .header-eyebrow {
       font-family: Georgia, 'Times New Roman', serif;
-      font-style: italic;
-      font-size: 13px;
-      letter-spacing: 0.06em;
-      color: #e8c97a;
-      margin-bottom: 8px;
+    }
+
+    /* ─── Header ─── */
+    header {
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201,150,59,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,150,59,0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold) 0%, rgba(201,150,59,0.3) 60%, transparent 100%);
+    }
+
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 56px 48px 48px;
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 40px;
+    }
+
+    .header-left { }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.05s ease forwards;
     }
 
     header h1 {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 28px;
-      font-weight: normal;
-      letter-spacing: 0.01em;
+      font-family: 'Cormorant Garant', serif;
+      font-size: clamp(38px, 5.5vw, 62px);
+      font-weight: 400;
+      color: #fdfbf5;
+      line-height: 1.0;
+      letter-spacing: -0.015em;
+      opacity: 0;
+      animation: fadeUp 0.75s 0.15s ease forwards;
     }
 
-    header p.subtitle {
-      margin-top: 6px;
-      font-size: 13px;
-      color: #c9b8a0;
-    }
-
-    /* ── Main layout ── */
-    main {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
-    }
-
-    .section-label {
-      font-family: Georgia, 'Times New Roman', serif;
+    header h1 em {
       font-style: italic;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #8a7e60;
-      margin-bottom: 20px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #e0d9c8;
+      color: var(--gold-light);
     }
 
-    /* ── Court cards ── */
-    .courts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+    .header-rule {
+      width: 44px;
+      height: 2px;
+      background: var(--gold);
+      margin: 22px 0 18px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.25s ease forwards;
     }
 
-    .court-card {
-      background: #fdfbf5;
-      border: 1.5px solid #d8ceb8;
-      border-radius: 8px;
-      overflow: hidden;
-      transition: box-shadow 0.15s ease, border-color 0.15s ease;
+    .header-desc {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: rgba(253,251,245,0.4);
+      letter-spacing: 0.06em;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.32s ease forwards;
     }
 
-    .court-card:hover {
-      box-shadow: 0 4px 16px rgba(107, 31, 31, 0.10);
-      border-color: #b89060;
-    }
-
-    .court-card-header {
-      background: #f3ede0;
-      border-bottom: 1.5px solid #d8ceb8;
-      padding: 14px 18px;
+    .header-stat {
       display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .court-badge {
-      width: 32px;
-      height: 32px;
-      background: #6b1f1f;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.4s ease forwards;
       flex-shrink: 0;
     }
 
-    .court-badge svg {
-      width: 16px;
-      height: 16px;
-      fill: #e8c97a;
+    .stat-num {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 52px;
+      font-weight: 400;
+      color: rgba(253,251,245,0.12);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(201,150,59,0.5);
+    }
+
+    /* ─── Main ─── */
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 60px 48px 100px;
+    }
+
+    /* ─── Section heads ─── */
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .section-mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      white-space: nowrap;
+    }
+
+    .section-rule {
+      height: 1px;
+      background: var(--rule);
+      flex: 1;
+    }
+
+    /* ─── Analysis Tool Cards ─── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 72px;
+    }
+
+    .tool-card {
+      display: block;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      border-radius: 3px;
+      padding: 40px 36px 40px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    .tool-card:nth-child(1) { animation-delay: 0.2s; }
+    .tool-card:nth-child(2) { animation-delay: 0.3s; }
+
+    .tool-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(15,25,35,0.22);
+    }
+
+    .tool-card-comparison {
+      background: var(--dark);
+      border: 1px solid rgba(201,150,59,0.2);
+    }
+
+    .tool-card-gaps {
+      background: var(--burgundy);
+      border: 1px solid rgba(232,201,122,0.15);
+    }
+
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -55deg,
+        transparent,
+        transparent 24px,
+        rgba(255,255,255,0.018) 24px,
+        rgba(255,255,255,0.018) 25px
+      );
+      pointer-events: none;
+    }
+
+    /* Large decorative letter */
+    .tool-card::after {
+      content: attr(data-letter);
+      position: absolute;
+      right: 28px;
+      bottom: -12px;
+      font-family: 'Cormorant Garant', serif;
+      font-size: 140px;
+      font-weight: 600;
+      font-style: italic;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .tool-card-comparison::after { color: rgba(201,150,59,0.06); }
+    .tool-card-gaps::after { color: rgba(255,255,255,0.06); }
+
+    .tool-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 22px;
+      padding: 3px 8px;
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .tool-card-comparison .tool-tag {
+      color: var(--gold);
+      background: rgba(201,150,59,0.12);
+      border: 1px solid rgba(201,150,59,0.25);
+    }
+
+    .tool-card-gaps .tool-tag {
+      color: rgba(232,201,122,0.9);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(232,201,122,0.2);
+    }
+
+    .tool-card h2 {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .tool-card-comparison h2 { color: #fdfbf5; }
+    .tool-card-gaps h2 { color: #fdfbf5; }
+
+    .tool-desc {
+      font-size: 13.5px;
+      line-height: 1.65;
+      position: relative;
+      max-width: 340px;
+    }
+
+    .tool-card-comparison .tool-desc { color: rgba(253,251,245,0.5); }
+    .tool-card-gaps .tool-desc { color: rgba(253,251,245,0.6); }
+
+    .tool-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 28px;
+      position: relative;
+    }
+
+    .tool-cta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .tool-card-comparison .tool-cta { color: var(--gold); }
+    .tool-card-gaps .tool-cta { color: rgba(232,201,122,0.8); }
+
+    .tool-arrow-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: transform 0.2s ease;
+    }
+
+    .tool-card:hover .tool-arrow-circle { transform: translate(3px, -3px); }
+
+    .tool-card-comparison .tool-arrow-circle {
+      background: rgba(201,150,59,0.12);
+      color: var(--gold);
+      border: 1px solid rgba(201,150,59,0.3);
+    }
+
+    .tool-card-gaps .tool-arrow-circle {
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.85);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* ─── Court cards grid ─── */
+    .courts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 14px;
+    }
+
+    .court-card {
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .court-card:nth-child(1) { animation-delay: 0.1s; }
+    .court-card:nth-child(2) { animation-delay: 0.18s; }
+    .court-card:nth-child(3) { animation-delay: 0.26s; }
+    .court-card:nth-child(4) { animation-delay: 0.34s; }
+    .court-card:nth-child(5) { animation-delay: 0.42s; }
+    .court-card:nth-child(6) { animation-delay: 0.5s; }
+
+    .court-card:hover {
+      border-color: #b89060;
+      box-shadow: 0 4px 22px rgba(107,31,31,0.09);
+    }
+
+    .court-card-header {
+      padding: 16px 20px 14px;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .court-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--card-bg);
+      background: var(--dark);
+      padding: 3px 8px;
+      border-radius: 2px;
+      flex-shrink: 0;
+      margin-top: 3px;
     }
 
     .court-card-title {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 15px;
-      color: #3a1010;
-      line-height: 1.3;
+      font-family: 'Cormorant Garant', serif;
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.2;
     }
 
-    .court-card-subtitle {
-      font-size: 11px;
-      color: #8a7e60;
-      margin-top: 2px;
+    .court-card-sub {
+      font-size: 11.5px;
+      color: var(--ink-faint);
+      margin-top: 3px;
+      font-style: italic;
     }
 
-    /* ── Case links ── */
-    .case-list {
-      list-style: none;
-      padding: 10px 0;
-    }
+    /* ─── Case links ─── */
+    .case-list { list-style: none; }
 
-    .case-list li {
-      border-bottom: 1px solid #ece5d4;
-    }
-
-    .case-list li:last-child {
-      border-bottom: none;
-    }
+    .case-list li { border-bottom: 1px solid var(--rule-light); }
+    .case-list li:last-child { border-bottom: none; }
 
     .case-list a {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 10px 18px;
+      gap: 9px;
+      padding: 8px 20px;
       text-decoration: none;
-      color: #2a1a1a;
-      font-size: 13.5px;
-      transition: background 0.12s ease, color 0.12s ease;
+      color: var(--ink-light);
+      font-size: 13px;
+      transition: background 0.1s ease, color 0.1s ease;
     }
 
     .case-list a:hover {
-      background: #f5ede0;
-      color: #6b1f1f;
+      background: #f0ead8;
+      color: var(--ink);
     }
 
-    .case-list a:hover .arrow {
+    .case-list a:hover .case-arrow {
       opacity: 1;
       transform: translateX(2px);
     }
 
     .case-tag {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      padding: 2px 6px;
-      border-radius: 3px;
-      margin-right: 8px;
-      vertical-align: middle;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 2px 5px;
+      border-radius: 2px;
       flex-shrink: 0;
+      text-transform: uppercase;
     }
 
     .tag-civil    { background: #ddeaf5; color: #1c4a7a; }
     .tag-criminal { background: #fde8e8; color: #7a1c1c; }
-    .tag-probate  { background: #e8f5e0; color: #2a6a1a; }
+    .tag-probate  { background: #e0f0d8; color: #2a5e1a; }
     .tag-family   { background: #f5e8f5; color: #6a1a6a; }
     .tag-juvenile { background: #fff3dc; color: #7a5000; }
-    .tag-general  { background: #e8e8e8; color: #444; }
+    .tag-general  { background: #e8e8e0; color: #4a4840; }
 
-    .case-name {
-      flex: 1;
-    }
+    .case-name { flex: 1; }
 
-    .arrow {
-      color: #c79b3b;
-      font-size: 14px;
-      opacity: 0.4;
+    .case-arrow {
+      color: var(--gold);
+      font-size: 15px;
+      opacity: 0.3;
       transition: opacity 0.12s ease, transform 0.12s ease;
+      flex-shrink: 0;
     }
 
-    /* ── Footer ── */
+    /* ─── Animations ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Footer ─── */
     footer {
-      text-align: center;
-      padding: 24px;
-      font-size: 11px;
-      color: #b0a890;
-      border-top: 1px solid #e0d9c8;
+      border-top: 1px solid var(--rule);
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    .footer-count {
+      font-family: 'Cormorant Garant', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--rule);
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 680px) {
+      .header-inner {
+        padding: 40px 24px 36px;
+        grid-template-columns: 1fr;
+      }
+      .header-stat { display: none; }
+      main { padding: 40px 24px 72px; }
+      .tools-grid { grid-template-columns: 1fr; }
+      .courts-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 8px; padding: 24px; }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="header-eyebrow">State of Tennessee · Judicial Branch</div>
-    <h1>Court Case Flow Index</h1>
-    <p class="subtitle">Select a court type and case category to view the procedural flow chart.</p>
+    <div class="header-inner">
+      <div class="header-left">
+        <div class="eyebrow">State of Tennessee · Judicial Branch</div>
+        <h1>Court Case <em>Flow</em><br>Reference Index</h1>
+        <div class="header-rule"></div>
+        <div class="header-desc">Select a court type or analysis tool to view procedural flows and research resources</div>
+      </div>
+      <div class="header-stat">
+        <div class="stat-num">37</div>
+        <div class="stat-label">Flow diagrams</div>
+      </div>
+    </div>
   </header>
 
   <main>
 
-    <div class="section-label">Trial Courts</div>
+    <!-- ── Analysis Tools ── -->
+    <div class="section-head">
+      <span class="section-title">Analysis Tools</span>
+      <span class="section-rule"></span>
+      <span class="section-mono">Special resources</span>
+    </div>
+
+    <div class="tools-grid">
+
+      <a href="Cross-Court-Comparison-standalone.html" class="tool-card tool-card-comparison" data-letter="C">
+        <div class="tool-tag">Cross-Court Analysis</div>
+        <h2>Cross-Court<br>Comparison</h2>
+        <p class="tool-desc">Compare procedural phases side-by-side across Circuit, Chancery, Criminal, and other court types.</p>
+        <div class="tool-footer">
+          <span class="tool-cta">Open tool →</span>
+          <div class="tool-arrow-circle">›</div>
+        </div>
+      </a>
+
+      <a href="Gaps-Index-standalone.html" class="tool-card tool-card-gaps" data-letter="G">
+        <div class="tool-tag">Research Gaps</div>
+        <h2>Gaps &amp; Flags<br>Index</h2>
+        <p class="tool-desc">All identified procedural gaps, local rule conflicts, and unresolved research questions in one place.</p>
+        <div class="tool-footer">
+          <span class="tool-cta">Open index →</span>
+          <div class="tool-arrow-circle">›</div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- ── Court Flows ── -->
+    <div class="section-head">
+      <span class="section-title">Trial Courts</span>
+      <span class="section-rule"></span>
+      <span class="section-mono">Case flows by court type</span>
+    </div>
 
     <div class="courts-grid">
 
       <!-- Circuit Court (CC) -->
       <div class="court-card">
         <div class="court-card-header">
-          <div class="court-badge">
-            <svg viewBox="0 0 20 20"><path d="M10 1L2 5v2h16V5L10 1zm-8 8h2v6H2v-6zm4 0h2v6H6v-6zm4 0h2v6h-2v-6zm4 0h2v6h-2v-6zM2 17h16v2H2v-2z"/></svg>
-          </div>
+          <span class="court-code">CC</span>
           <div>
             <div class="court-card-title">Circuit Court</div>
-            <div class="court-card-subtitle">General civil &amp; criminal jurisdiction</div>
+            <div class="court-card-sub">General civil &amp; criminal jurisdiction</div>
           </div>
         </div>
         <ul class="case-list">
           <li>
             <a href="CC-CIV.html">
               <span class="case-tag tag-civil">Civil</span>
-              <span class="case-name">Civil - General Flow</span>
-              <span class="arrow">›</span>
+              <span class="case-name">Civil — General Flow</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="CC-DIV.html">
               <span class="case-tag tag-family">Family</span>
               <span class="case-name">Divorce (Domestic Relations)</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="CC-CUS.html">
               <span class="case-tag tag-family">Family</span>
               <span class="case-name">Child Custody &amp; Visitation</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="CC-SUP.html">
               <span class="case-tag tag-family">Family</span>
               <span class="case-name">Child Support</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="CC-APP.html">
               <span class="case-tag tag-civil">Civil</span>
               <span class="case-name">Appeals from General Sessions (De Novo)</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
         </ul>
@@ -263,12 +621,10 @@
       <!-- Chancery Court (CH) -->
       <div class="court-card">
         <div class="court-card-header">
-          <div class="court-badge">
-            <svg viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9zM4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"/></svg>
-          </div>
+          <span class="court-code">CH</span>
           <div>
             <div class="court-card-title">Chancery Court</div>
-            <div class="court-card-subtitle">Equity, property &amp; complex civil matters</div>
+            <div class="court-card-sub">Equity, property &amp; complex civil matters</div>
           </div>
         </div>
         <ul class="case-list">
@@ -276,49 +632,49 @@
             <a href="CH-DOM.html">
               <span class="case-tag tag-family">Family</span>
               <span class="case-name">Divorce &amp; Dissolution</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="CH-PRO.html">
               <span class="case-tag tag-civil">Civil</span>
               <span class="case-name">Property &amp; Title Dispute</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="CH-EQU.html">
               <span class="case-tag tag-civil">Civil</span>
               <span class="case-name">General Equity</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="CH-TRU.html">
               <span class="case-tag tag-civil">Civil</span>
               <span class="case-name">Trust &amp; Estate Litigation</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="CH-CGD.html">
               <span class="case-tag tag-civil">Civil</span>
               <span class="case-name">Conservatorship &amp; Adult Guardianship</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="CH-FOR.html">
               <span class="case-tag tag-civil">Civil</span>
               <span class="case-name">Judicial Foreclosure</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="CH-MNH.html">
               <span class="case-tag tag-general">General</span>
               <span class="case-name">Mental Health Commitment</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
         </ul>
@@ -327,55 +683,53 @@
       <!-- Criminal Court (CR) -->
       <div class="court-card">
         <div class="court-card-header">
-          <div class="court-badge">
-            <svg viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 14a6 6 0 110-12 6 6 0 010 12zM9 7h2v5H9V7zm0 6h2v2H9v-2z"/></svg>
-          </div>
+          <span class="court-code">CR</span>
           <div>
             <div class="court-card-title">Criminal Court</div>
-            <div class="court-card-subtitle">Felony prosecutions (major counties)</div>
+            <div class="court-card-sub">Felony prosecutions (major counties)</div>
           </div>
         </div>
         <ul class="case-list">
           <li>
             <a href="CR-FEL.html">
               <span class="case-tag tag-criminal">Criminal</span>
-              <span class="case-name">Felony - General Flow</span>
-              <span class="arrow">›</span>
+              <span class="case-name">Felony — General Flow</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="CR-GRJ.html">
               <span class="case-tag tag-criminal">Criminal</span>
-              <span class="case-name">Grand Jury - Regular</span>
-              <span class="arrow">›</span>
+              <span class="case-name">Grand Jury — Regular</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="CR-GRJ-INV.html">
               <span class="case-tag tag-criminal">Criminal</span>
-              <span class="case-name">Grand Jury - Investigative</span>
-              <span class="arrow">›</span>
+              <span class="case-name">Grand Jury — Investigative</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="CR-MIS.html">
               <span class="case-tag tag-criminal">Criminal</span>
               <span class="case-name">Misdemeanor</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="CR-PRB.html">
               <span class="case-tag tag-criminal">Criminal</span>
               <span class="case-name">Probation Violation</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="CR-APP.html">
               <span class="case-tag tag-criminal">Criminal</span>
               <span class="case-name">Appeals from General Sessions</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
         </ul>
@@ -384,12 +738,10 @@
       <!-- Probate Court (PR) -->
       <div class="court-card">
         <div class="court-card-header">
-          <div class="court-badge">
-            <svg viewBox="0 0 20 20"><path d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586L7.707 10.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z"/></svg>
-          </div>
+          <span class="court-code">PR</span>
           <div>
             <div class="court-card-title">Probate Court</div>
-            <div class="court-card-subtitle">Estates, wills &amp; guardianships</div>
+            <div class="court-card-sub">Estates, wills &amp; guardianships</div>
           </div>
         </div>
         <ul class="case-list">
@@ -397,35 +749,35 @@
             <a href="PR-TES.html">
               <span class="case-tag tag-probate">Probate</span>
               <span class="case-name">Estate Administration</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="PR-GRD.html">
               <span class="case-tag tag-probate">Probate</span>
               <span class="case-name">Guardianship of Minors</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="PR-CON.html">
               <span class="case-tag tag-probate">Probate</span>
               <span class="case-name">Conservatorship</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="PR-WIL.html">
               <span class="case-tag tag-probate">Probate</span>
               <span class="case-name">Will Contest</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="PR-TRU.html">
               <span class="case-tag tag-probate">Probate</span>
               <span class="case-name">Testamentary Trust Administration</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
         </ul>
@@ -434,12 +786,10 @@
       <!-- General Sessions Court (GS) -->
       <div class="court-card">
         <div class="court-card-header">
-          <div class="court-badge">
-            <svg viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H3a1 1 0 01-1-1V3zm0 6a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H3a1 1 0 01-1-1V9zm1 5a1 1 0 000 2h14a1 1 0 100-2H3z"/></svg>
-          </div>
+          <span class="court-code">GS</span>
           <div>
             <div class="court-card-title">General Sessions Court</div>
-            <div class="court-card-subtitle">Misdemeanors, small claims &amp; civil warrants</div>
+            <div class="court-card-sub">Misdemeanors, small claims &amp; civil warrants</div>
           </div>
         </div>
         <ul class="case-list">
@@ -447,42 +797,42 @@
             <a href="GS-CIV.html">
               <span class="case-tag tag-general">General</span>
               <span class="case-name">Civil</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="GS-CRM.html">
               <span class="case-tag tag-criminal">Criminal</span>
-              <span class="case-name">Criminal - General Flow</span>
-              <span class="arrow">›</span>
+              <span class="case-name">Criminal — General Flow</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="GS-PRE.html">
               <span class="case-tag tag-criminal">Criminal</span>
               <span class="case-name">Preliminary Hearing (Felony Bind-Over)</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="GS-OOP.html">
               <span class="case-tag tag-general">General</span>
               <span class="case-name">Order of Protection</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="GS-TRF.html">
               <span class="case-tag tag-general">General</span>
               <span class="case-name">Traffic</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="GS-ENV.html">
               <span class="case-tag tag-general">General</span>
               <span class="case-name">Environmental Court</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
         </ul>
@@ -491,12 +841,10 @@
       <!-- Juvenile Court (JV) -->
       <div class="court-card">
         <div class="court-card-header">
-          <div class="court-badge">
-            <svg viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906zM7 13h6a5 5 0 015 5v2H2v-2a5 5 0 015-5z"/></svg>
-          </div>
+          <span class="court-code">JV</span>
           <div>
             <div class="court-card-title">Juvenile Court</div>
-            <div class="court-card-subtitle">Minors, dependency &amp; delinquency</div>
+            <div class="court-card-sub">Minors, dependency &amp; delinquency</div>
           </div>
         </div>
         <ul class="case-list">
@@ -504,56 +852,56 @@
             <a href="JV-DEL.html">
               <span class="case-tag tag-juvenile">Juvenile</span>
               <span class="case-name">Delinquency &amp; Unruly Child</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="JV-DEP.html">
               <span class="case-tag tag-juvenile">Juvenile</span>
               <span class="case-name">Dependency &amp; Neglect (DCS)</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="JV-TER.html">
               <span class="case-tag tag-family">Family</span>
               <span class="case-name">Termination of Parental Rights</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="JV-ADO.html">
               <span class="case-tag tag-juvenile">Juvenile</span>
               <span class="case-name">Adoption</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="JV-CUS.html">
               <span class="case-tag tag-juvenile">Juvenile</span>
               <span class="case-name">Custody &amp; Visitation</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="JV-SUP.html">
               <span class="case-tag tag-juvenile">Juvenile</span>
               <span class="case-name">Child Support</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="JV-MNH.html">
               <span class="case-tag tag-juvenile">Juvenile</span>
               <span class="case-name">Mental Health</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
           <li>
             <a href="JV-TRF.html">
               <span class="case-tag tag-juvenile">Juvenile</span>
               <span class="case-name">Traffic</span>
-              <span class="arrow">›</span>
+              <span class="case-arrow">›</span>
             </a>
           </li>
         </ul>
@@ -564,7 +912,8 @@
   </main>
 
   <footer>
-    State of Tennessee · Judicial Branch · Case Flow Reference
+    <span class="footer-text">State of Tennessee · Judicial Branch · Case Flow Reference</span>
+    <span class="footer-count">6 courts · 35 flows · 2 analysis tools</span>
   </footer>
 
 </body>
