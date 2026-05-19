@@ -25,6 +25,8 @@
       --gold-light: #e8c97a;
       --gold-dim: rgba(201,150,59,0.25);
       --burgundy: #6b1f1f;
+      --forest: #1b3328;
+      --slate: #1a2d42;
     }
 
     html { scroll-behavior: smooth; }
@@ -211,6 +213,8 @@
 
     .tool-card:nth-child(1) { animation-delay: 0.2s; }
     .tool-card:nth-child(2) { animation-delay: 0.3s; }
+    .tool-card:nth-child(3) { animation-delay: 0.4s; }
+    .tool-card:nth-child(4) { animation-delay: 0.5s; }
 
     .tool-card:hover {
       transform: translateY(-4px);
@@ -258,6 +262,19 @@
     .tool-card-comparison::after { color: rgba(201,150,59,0.06); }
     .tool-card-gaps::after { color: rgba(255,255,255,0.06); }
 
+    .tool-card-local {
+      background: var(--forest);
+      border: 1px solid rgba(100,200,130,0.15);
+    }
+
+    .tool-card-electronic {
+      background: var(--slate);
+      border: 1px solid rgba(100,160,220,0.18);
+    }
+
+    .tool-card-local::after    { color: rgba(255,255,255,0.05); }
+    .tool-card-electronic::after { color: rgba(255,255,255,0.05); }
+
     .tool-tag {
       font-family: 'JetBrains Mono', monospace;
       font-size: 9px;
@@ -282,6 +299,18 @@
       border: 1px solid rgba(232,201,122,0.2);
     }
 
+    .tool-card-local .tool-tag {
+      color: rgba(140,220,160,0.9);
+      background: rgba(140,220,160,0.1);
+      border: 1px solid rgba(140,220,160,0.2);
+    }
+
+    .tool-card-electronic .tool-tag {
+      color: rgba(120,180,240,0.9);
+      background: rgba(120,180,240,0.1);
+      border: 1px solid rgba(120,180,240,0.2);
+    }
+
     .tool-card h2 {
       font-family: 'Cormorant Garant', serif;
       font-size: 32px;
@@ -293,6 +322,8 @@
 
     .tool-card-comparison h2 { color: #fdfbf5; }
     .tool-card-gaps h2 { color: #fdfbf5; }
+    .tool-card-local h2 { color: #fdfbf5; }
+    .tool-card-electronic h2 { color: #fdfbf5; }
 
     .tool-desc {
       font-size: 13.5px;
@@ -303,6 +334,8 @@
 
     .tool-card-comparison .tool-desc { color: rgba(253,251,245,0.5); }
     .tool-card-gaps .tool-desc { color: rgba(253,251,245,0.6); }
+    .tool-card-local .tool-desc { color: rgba(253,251,245,0.55); }
+    .tool-card-electronic .tool-desc { color: rgba(253,251,245,0.55); }
 
     .tool-footer {
       display: flex;
@@ -321,6 +354,8 @@
 
     .tool-card-comparison .tool-cta { color: var(--gold); }
     .tool-card-gaps .tool-cta { color: rgba(232,201,122,0.8); }
+    .tool-card-local .tool-cta { color: rgba(140,220,160,0.85); }
+    .tool-card-electronic .tool-cta { color: rgba(120,180,240,0.85); }
 
     .tool-arrow-circle {
       width: 34px;
@@ -345,6 +380,18 @@
       background: rgba(255,255,255,0.1);
       color: rgba(255,255,255,0.85);
       border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .tool-card-local .tool-arrow-circle {
+      background: rgba(140,220,160,0.12);
+      color: rgba(140,220,160,0.9);
+      border: 1px solid rgba(140,220,160,0.25);
+    }
+
+    .tool-card-electronic .tool-arrow-circle {
+      background: rgba(120,180,240,0.12);
+      color: rgba(120,180,240,0.9);
+      border: 1px solid rgba(120,180,240,0.25);
     }
 
     /* ─── Court cards grid ─── */
@@ -555,6 +602,26 @@
         <p class="tool-desc">All identified procedural gaps, local rule conflicts, and unresolved research questions in one place.</p>
         <div class="tool-footer">
           <span class="tool-cta">Open index →</span>
+          <div class="tool-arrow-circle">›</div>
+        </div>
+      </a>
+
+      <a href="Local-Rules.html" class="tool-card tool-card-local" data-letter="L">
+        <div class="tool-tag">Local Rules Research</div>
+        <h2>Local Rules<br>Index</h2>
+        <p class="tool-desc">District-level rules flagged for conflicts with statewide procedural rules and gaps referencing unadopted provisions.</p>
+        <div class="tool-footer">
+          <span class="tool-cta">Open index →</span>
+          <div class="tool-arrow-circle">›</div>
+        </div>
+      </a>
+
+      <a href="Electronic-Eligibility.html" class="tool-card tool-card-electronic" data-letter="E">
+        <div class="tool-tag">E-Filing &amp; Electronic</div>
+        <h2>Electronic<br>Eligibility</h2>
+        <p class="tool-desc">Where courts may proceed electronically — permitted, mandatory, and forbidden proceedings mapped by case type.</p>
+        <div class="tool-footer">
+          <span class="tool-cta">Open tool →</span>
           <div class="tool-arrow-circle">›</div>
         </div>
       </a>
@@ -913,7 +980,7 @@
 
   <footer>
     <span class="footer-text">State of Tennessee · Judicial Branch · Case Flow Reference</span>
-    <span class="footer-count">6 courts · 35 flows · 2 analysis tools</span>
+    <span class="footer-count">6 courts · 35 flows · 4 analysis tools</span>
   </footer>
 
 </body>
