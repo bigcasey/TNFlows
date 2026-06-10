@@ -215,6 +215,9 @@
     .tool-card:nth-child(2) { animation-delay: 0.3s; }
     .tool-card:nth-child(3) { animation-delay: 0.4s; }
     .tool-card:nth-child(4) { animation-delay: 0.5s; }
+    .tool-card:nth-child(5) { animation-delay: 0.6s; }
+    .tool-card:nth-child(6) { animation-delay: 0.7s; }
+    .tool-card:nth-child(7) { animation-delay: 0.8s; }
 
     .tool-card:hover {
       transform: translateY(-4px);
@@ -390,9 +393,41 @@
 
     .tool-card-electronic .tool-arrow-circle {
       background: rgba(120,180,240,0.12);
-      color: rgba(120,180,240,0.9);
-      border: 1px solid rgba(120,180,240,0.25);
+      color: rgba(120,180,240,0.9);      border: 1px solid rgba(120,180,240,0.25);
     }
+
+    .tool-card-requirements {
+      background: #1f2b4d;
+      border: 1px solid rgba(130,160,240,0.2);
+    }
+    .tool-card-requirements::after { color: rgba(150,175,245,0.06); }
+    .tool-card-requirements .tool-tag { color: rgba(150,175,245,0.95); background: rgba(150,175,245,0.12); }
+    .tool-card-requirements h2 { color: #fdfbf5; }
+    .tool-card-requirements .tool-desc { color: rgba(253,251,245,0.55); }
+    .tool-card-requirements .tool-cta { color: rgba(150,175,245,0.9); }
+    .tool-card-requirements .tool-arrow-circle { background: rgba(150,175,245,0.12); color: rgba(150,175,245,0.95); border: 1px solid rgba(150,175,245,0.25); }
+
+    .tool-card-exchange {
+      background: #3a1326;
+      border: 1px solid rgba(232,140,180,0.2);
+    }
+    .tool-card-exchange::after { color: rgba(232,140,180,0.06); }
+    .tool-card-exchange .tool-tag { color: rgba(240,160,195,0.95); background: rgba(240,160,195,0.12); }
+    .tool-card-exchange h2 { color: #fdfbf5; }
+    .tool-card-exchange .tool-desc { color: rgba(253,251,245,0.55); }
+    .tool-card-exchange .tool-cta { color: rgba(240,160,195,0.9); }
+    .tool-card-exchange .tool-arrow-circle { background: rgba(240,160,195,0.12); color: rgba(240,160,195,0.95); border: 1px solid rgba(240,160,195,0.25); }
+
+    .tool-card-bpr {
+      background: #16321f;
+      border: 1px solid rgba(120,200,150,0.2);
+    }
+    .tool-card-bpr::after { color: rgba(120,200,150,0.06); }
+    .tool-card-bpr .tool-tag { color: rgba(150,215,175,0.95); background: rgba(150,215,175,0.12); }
+    .tool-card-bpr h2 { color: #fdfbf5; }
+    .tool-card-bpr .tool-desc { color: rgba(253,251,245,0.55); }
+    .tool-card-bpr .tool-cta { color: rgba(150,215,175,0.9); }
+    .tool-card-bpr .tool-arrow-circle { background: rgba(150,215,175,0.12); color: rgba(150,215,175,0.95); border: 1px solid rgba(150,215,175,0.25); }
 
     /* ─── Court cards grid ─── */
     .courts-grid {
@@ -569,7 +604,7 @@
         <div class="header-desc">Select a court type or analysis tool to view procedural flows and research resources</div>
       </div>
       <div class="header-stat">
-        <div class="stat-num">39</div>
+        <div class="stat-num">38</div>
         <div class="stat-label">Flow diagrams</div>
       </div>
     </div>
@@ -598,8 +633,9 @@
 
       <a href="Gaps-Index.html" class="tool-card tool-card-gaps" data-letter="G">
         <div class="tool-tag">Research Gaps</div>
-        <h2>Gaps &amp; Flags<br>Index</h2>
-        <p class="tool-desc">All identified procedural gaps, local rule conflicts, and unresolved research questions in one place.</p>
+        <h2>Gaps &amp; Practitioner Note
+Index</h2>
+        <p class="tool-desc">All identified procedural gaps and practitioner notes.</p>
         <div class="tool-footer">
           <span class="tool-cta">Open index →</span>
           <div class="tool-arrow-circle">›</div>
@@ -608,8 +644,8 @@
 
       <a href="Local-Rules.html" class="tool-card tool-card-local" data-letter="L">
         <div class="tool-tag">Local Rules Research</div>
-        <h2>Local Rules<br>Index</h2>
-        <p class="tool-desc">District-level rules flagged for conflicts with statute and statewide rules.</p>
+        <h2>Local Rules Index</h2>
+        <p class="tool-desc">District-level local rules flagged for conflicts with statute and statewide rules.</p>
         <div class="tool-footer">
           <span class="tool-cta">Open index →</span>
           <div class="tool-arrow-circle">›</div>
@@ -618,10 +654,41 @@
 
       <a href="Electronic-Eligibility.html" class="tool-card tool-card-electronic" data-letter="E">
         <div class="tool-tag">E-Filing &amp; Electronic</div>
-        <h2>Electronic<br>Eligibility</h2>
-        <p class="tool-desc">Where courts may proceed electronically — permitted, mandatory, and forbidden proceedings mapped by case type.</p>
+        <h2>Electronic Eligibility</h2>
+        <p class="tool-desc">Where courts may proceed electronically. Mandatory, permitted, and forbidden proceedings mapped by case type.</p>
         <div class="tool-footer">
           <span class="tool-cta">Open tool →</span>
+          <div class="tool-arrow-circle">›</div>
+        </div>
+      </a>
+
+      <a href="Requirements-Coverage.html" class="tool-card tool-card-requirements" data-letter="R">
+        <div class="tool-tag">CMS RFP Coverage</div>
+        <h2>Requirements Coverage</h2>
+        <p class="tool-desc">How the 1,235  RFP requirements map onto the case flows.</p>
+        <div class="tool-footer">
+          <span class="tool-cta">Open dashboard →</span>
+          <div class="tool-arrow-circle">›</div>
+        </div>
+      </a>
+
+      <a href="Data-Exchange-Catalog.html" class="tool-card tool-card-exchange" data-letter="X">
+        <div class="tool-tag">Integration Scope</div>
+        <h2>Data Exchange Potential
+</h2>
+        <p class="tool-desc">The potential data exchanges the system might need to  support. Includes both inbound and outbound, by partner, channel, and the case steps that trigger them.</p>
+        <div class="tool-footer">
+          <span class="tool-cta">Open catalog →</span>
+          <div class="tool-arrow-circle">›</div>
+        </div>
+      </a>
+
+      <a href="BPR-Sessions.html" class="tool-card tool-card-bpr" data-letter="B">
+        <div class="tool-tag">Process Review</div>
+        <h2>BPR Sessions</h2>
+        <p class="tool-desc">What the business-process-review workshops covered, laid over the flows. Includes substantive coverage of process steps, dark steps, and which clerks &amp; counties were in the room.</p>
+        <div class="tool-footer">
+          <span class="tool-cta">Open dashboard →</span>
           <div class="tool-arrow-circle">›</div>
         </div>
       </a>
@@ -779,13 +846,6 @@
             </a>
           </li>
           <li>
-            <a href="CR-GRJ.html">
-              <span class="case-tag tag-criminal">Criminal</span>
-              <span class="case-name">Grand Jury - Regular</span>
-              <span class="case-arrow">›</span>
-            </a>
-          </li>
-          <li>
             <a href="CR-GRJ-INV.html">
               <span class="case-tag tag-criminal">Criminal</span>
               <span class="case-name">Grand Jury - Investigative</span>
@@ -796,20 +856,6 @@
             <a href="CR-MIS.html">
               <span class="case-tag tag-criminal">Criminal</span>
               <span class="case-name">Misdemeanor</span>
-              <span class="case-arrow">›</span>
-            </a>
-          </li>
-          <li>
-            <a href="CR-PRB.html">
-              <span class="case-tag tag-criminal">Criminal</span>
-              <span class="case-name">Probation Violation</span>
-              <span class="case-arrow">›</span>
-            </a>
-          </li>
-          <li>
-            <a href="CR-APP.html">
-              <span class="case-tag tag-criminal">Criminal</span>
-              <span class="case-name">Appeals from General Sessions</span>
               <span class="case-arrow">›</span>
             </a>
           </li>
@@ -994,7 +1040,7 @@
 
   <footer>
     <span class="footer-text">State of Tennessee · Judicial Branch · Case Flow Reference</span>
-    <span class="footer-count">6 courts · 39 flows · 4 analysis tools</span>
+    <span class="footer-count">6 courts · 38 flows · 4 analysis tools</span>
   </footer>
 
 </body>
