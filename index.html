@@ -155,9 +155,24 @@
 
     /* ─── Main ─── */
     main {
-      max-width: 1120px;
+      max-width: 1280px;
       margin: 0 auto;
-      padding: 60px 48px 100px;
+      padding: 56px 48px 100px;
+    }
+
+    /* ─── Two-column layout: standing tool rail (left) + flows (right) ─── */
+    .layout {
+      display: grid;
+      grid-template-columns: 322px 1fr;
+      gap: 44px;
+      align-items: start;
+    }
+    .rail { position: sticky; top: 24px; }
+    .main-col { min-width: 0; }
+
+    @media (max-width: 920px) {
+      .layout { grid-template-columns: 1fr; gap: 0; }
+      .rail { position: static; margin-bottom: 56px; }
     }
 
     /* ─── Section heads ─── */
@@ -194,9 +209,9 @@
     /* ─── Analysis Tool Cards ─── */
     .tools-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      margin-bottom: 72px;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 0;
     }
 
     .tool-card {
@@ -205,8 +220,8 @@
       position: relative;
       overflow: hidden;
       border-radius: 3px;
-      padding: 26px 30px 26px;
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      padding: 15px 18px 14px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
       opacity: 0;
       animation: fadeUp 0.7s ease forwards;
     }
@@ -218,10 +233,11 @@
     .tool-card:nth-child(5) { animation-delay: 0.6s; }
     .tool-card:nth-child(6) { animation-delay: 0.7s; }
     .tool-card:nth-child(7) { animation-delay: 0.8s; }
+    .tool-card:nth-child(8) { animation-delay: 0.9s; }
 
     .tool-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(15,25,35,0.22);
+      transform: translateX(3px);
+      box-shadow: 0 8px 26px rgba(15,25,35,0.20);
     }
 
     .tool-card-comparison {
@@ -252,10 +268,10 @@
     .tool-card::after {
       content: attr(data-letter);
       position: absolute;
-      right: 28px;
-      bottom: -12px;
+      right: 14px;
+      bottom: -16px;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 140px;
+      font-size: 76px;
       font-weight: 600;
       font-style: italic;
       line-height: 1;
@@ -280,12 +296,12 @@
 
     .tool-tag {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.2em;
+      font-size: 8px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       display: inline-block;
-      margin-bottom: 22px;
-      padding: 3px 8px;
+      margin-bottom: 0;
+      padding: 3px 7px;
       border-radius: 2px;
       position: relative;
     }
@@ -316,10 +332,10 @@
 
     .tool-card h2 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 27px;
+      font-size: 19px;
       font-weight: 500;
-      line-height: 1.1;
-      margin-bottom: 10px;
+      line-height: 1.08;
+      margin-bottom: 5px;
       position: relative;
     }
 
@@ -329,9 +345,10 @@
     .tool-card-electronic h2 { color: #fdfbf5; }
 
     .tool-desc {
-      font-size: 13px;
-      line-height: 1.55;
+      font-size: 11.5px;
+      line-height: 1.5;
       position: relative;
+      max-width: 90%;
     }
 
     .tool-card-comparison .tool-desc { color: rgba(253,251,245,0.5); }
@@ -343,7 +360,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 20px;
+      margin-top: 12px;
       position: relative;
     }
 
@@ -360,14 +377,15 @@
     .tool-card-electronic .tool-cta { color: rgba(120,180,240,0.85); }
 
     .tool-arrow-circle {
-      width: 34px;
-      height: 34px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 15px;
       transition: transform 0.2s ease;
+      flex-shrink: 0;
     }
 
     .tool-card:hover .tool-arrow-circle { transform: translate(3px, -3px); }
@@ -427,6 +445,17 @@
     .tool-card-bpr .tool-desc { color: rgba(253,251,245,0.55); }
     .tool-card-bpr .tool-cta { color: rgba(150,215,175,0.9); }
     .tool-card-bpr .tool-arrow-circle { background: rgba(150,215,175,0.12); color: rgba(150,215,175,0.95); border: 1px solid rgba(150,215,175,0.25); }
+
+    .tool-card-fees {
+      background: #16233f;
+      border: 1px solid rgba(130,170,240,0.2);
+    }
+    .tool-card-fees::after { color: rgba(130,170,240,0.06); }
+    .tool-card-fees .tool-tag { color: rgba(150,185,245,0.95); background: rgba(150,185,245,0.12); }
+    .tool-card-fees h2 { color: #fdfbf5; }
+    .tool-card-fees .tool-desc { color: rgba(253,251,245,0.55); }
+    .tool-card-fees .tool-cta { color: rgba(150,185,245,0.9); }
+    .tool-card-fees .tool-arrow-circle { background: rgba(150,185,245,0.12); color: rgba(150,185,245,0.95); border: 1px solid rgba(150,185,245,0.25); }
 
     /* ─── Court cards grid ─── */
     .courts-grid {
@@ -599,7 +628,7 @@
       <div class="header-left">
         <div class="eyebrow">State of Tennessee · Judicial Branch</div>
         <h1>Court Case Flows
-Reference and Research Tools</h1>
+Reference and Analysis Tools</h1>
         <div class="header-rule"></div>
         <div class="header-desc">Select a court type or analysis tool to view procedural flows and research resources</div>
       </div>
@@ -611,6 +640,8 @@ Reference and Research Tools</h1>
   </header>
 
   <main>
+    <div class="layout">
+    <aside class="rail">
 
     <!-- ── Analysis Tools ── -->
     <div class="section-head">
@@ -686,8 +717,19 @@ Index</h2>
         </div>
       </a>
 
-    </div>
+      <a href="Fees-Costs.html" class="tool-card tool-card-fees" data-letter="$">
+        <h2>Fees &amp; Costs</h2>
+        <p class="tool-desc">Filing fees organized by statutory category under § 8-21-401(b) and (c)(1). A cost-to-file calculator totals the filing fee, litigation taxes, and clerk and officer charges by case type and year, alongside a statute-vs-schedule reconciliation worklist.</p>
+        <div class="tool-footer">
+          <span class="tool-cta">Open dashboard →</span>
+          <div class="tool-arrow-circle">›</div>
+        </div>
+      </a>
 
+    </div>
+    </aside>
+
+    <section class="main-col">
     <!-- ── Court Flows ── -->
     <div class="section-head">
       <span class="section-title">Trial Courts</span>
@@ -1028,6 +1070,8 @@ Index</h2>
       </div>
 
     </div><!-- /courts-grid -->
+    </section>
+    </div><!-- /layout -->
 
   </main>
 
